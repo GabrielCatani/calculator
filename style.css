@@ -1,0 +1,59 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    width: 500px;
+    height: 600px;
+    margin-top: 120px;
+}
+
+.display {
+    width: 100%;
+    border: 1px solid black;
+    margin-bottom: -1px;
+}
+
+.operand,
+.operator {
+    background: gray;
+    width: 25%;
+    text-align: center;
+    line-height: 100px;
+    font-size: 28px;
+    color: white;
+    border: 1px black solid;
+    margin: -1px;
+}
+
+.display, 
+.operand,
+.operator {
+    height: 16.7%;
+}
+
+.operator {
+    background: #FF9933;
+}
+
+#clear {
+    width: 49.8%;
+}
+
+#backspace {
+    width: 25%;
+}
+
+#zeroKey {
+    width: 49.8%;
+}
+
+#comma {
+    width: 25%;
+}
