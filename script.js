@@ -56,33 +56,52 @@ function operate(nbr1, nbr2, opearator) {
     console.log(result);
 }
 
-function commandParser(token) {
-    if (typeof token === 'number') {
-        if (!operator) {
-            if (!nbr1) {
-                nbr1 = token;
-            }
-            else {
-                nbr1 = (nbr1 * 10) + token;
-            }
+function inputNumber(number) {
+    if (!operator) {
+        if (!nbr1) {
+            nbr1 = number;
         }
         else {
-            if (!nbr2) {
-                nbr2 = token;
-            }
-            else {
-                nbr2 = (nbr2 * 10) + token;
-            }
-       }
+            nbr1 = (nbr1 * 10) + number;
+        }
+    }
+    else {
+        if (!nbr2) {
+            nbr2 = number;
+        }
+        else {
+            nbr2 = (nbr2 * 10) + number;
+        }
+    }
+}
+
+function backspace() {
+    if (!nbr1) {
+        return;
+    }
+
+    if (!nbr2) {
+        nbr1 = parseInt(nbr1 / 10);
+    }
+    else {
+        nbr2 = parseInt(nbr2 / 10);
+    }
+}
+
+function commandParser(token) {
+    if (typeof token === 'number') {
+        inputNumber(token);
     }
     else if(token === 'clear') {
         nbr1 = undefined;
         nbr2 = undefined;
         operator = undefined;
     }
+    else if (token === 'backspace') {
+        backspace();
+    } 
     else if (token !== 'execute' &&
-             token !== 'comma' && 
-             token !== 'backspace') {
+             token !== 'comma') { 
         operator = token;
     }
     else if (token === 'execute') {
