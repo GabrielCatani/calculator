@@ -80,7 +80,7 @@ function backspace() {
         return;
     }
 
-    if (!nbr2) {
+    if (!nbr2 && nbr2 !== 0) {
         nbr1 = parseInt(nbr1 / 10);
     }
     else {
@@ -100,8 +100,7 @@ function commandParser(token) {
     else if (token === 'backspace') {
         backspace();
     } 
-    else if (token !== 'execute' &&
-             token !== 'comma') { 
+    else if (token !== 'execute') { 
         operator = token;
     }
     else if (token === 'execute') {
