@@ -3,6 +3,7 @@
 let nbr1 = undefined;
 let nbr2 = undefined;
 let operator = undefined;
+let result = undefined;
 
 function add(nbr1, nbr2) {
     return nbr1 + nbr2;
@@ -37,8 +38,6 @@ function commandLexer(keyPressed) {
 }
 
 function operate(nbr1, nbr2, opearator) {
-    let result = undefined;
-
     switch(operator) {
         case 'sum':
             result = add(nbr1, nbr2); 
@@ -53,7 +52,6 @@ function operate(nbr1, nbr2, opearator) {
             result = divide(nbr1, nbr2); 
             break;
     } 
-    console.log(result);
 }
 
 function inputNumber(number) {
@@ -96,6 +94,7 @@ function commandParser(token) {
         nbr1 = undefined;
         nbr2 = undefined;
         operator = undefined;
+        result = undefined;
     }
     else if (token === 'backspace') {
         backspace();
@@ -106,20 +105,40 @@ function commandParser(token) {
     else if (token === 'execute') {
         operate(nbr1, nbr2, operator);
     }
-    console.log("Nbr1: " + nbr1 + "\nNbr2: " + nbr2 + "\nOp: " + operator);
+    console.log("Nbr1: " + nbr1 + "\nNbr2: "
+        + nbr2 + "\nOp: " + operator + "\nResult: " + result);
 }
 
 function calculatorInit() {
     const calculator = document.querySelector(".calculator");
-
     const buttons = Array.from(calculator.children);
+
+    display();
 
     buttons.forEach((calcKey) => {
         calcKey.addEventListener('click', () => {
             const token = commandLexer(calcKey.getAttribute('id'));
             commandParser(token);
+            display();
         });
     });
+}
+
+function display() {
+    const display = document.querySelector('.display');
+    
+    if (result) {
+        display.innerHTML = result;
+    }
+    else if (!nbr1) {
+        display.innerHTML = 0;        
+    }
+    else if (!nbr2) {
+        display.innerHTML = nbr1;
+    }
+    else {
+        display.innerHTML = nbr2;
+    }
 }
 
 calculatorInit();
