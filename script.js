@@ -59,13 +59,21 @@ function operate(nbr1, nbr2, opearator) {
 function commandParser(token) {
     if (typeof token === 'number') {
         if (!operator) {
-            //append to nbr1
-            nbr1 = token;
+            if (!nbr1) {
+                nbr1 = token;
+            }
+            else {
+                nbr1 = (nbr1 * 10) + token;
+            }
         }
         else {
-            //append to nbr2
-            nbr2 = token;
-        }
+            if (!nbr2) {
+                nbr2 = token;
+            }
+            else {
+                nbr2 = (nbr2 * 10) + token;
+            }
+       }
     }
     else if(token === 'clear') {
         nbr1 = undefined;
