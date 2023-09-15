@@ -37,21 +37,33 @@ function commandLexer(keyPressed) {
     return keyPressed;
 }
 
-function operate(nbr1, nbr2, opearator) {
+function clear() {
+    nbr1 = undefined;
+    nbr2 = undefined;
+    operator = undefined;
+    result = undefined;
+}
+
+function operate(n1, n2, opearator) {
+    let r = undefined;
+
     switch(operator) {
         case 'sum':
-            result = add(nbr1, nbr2); 
+            r = add(n1, n2); 
             break;
         case 'multiply':
-            result = multiply(nbr1, nbr2); 
+            r = multiply(n1, n2); 
             break;
         case 'subtract':
-            result = subtract(nbr1, nbr2); 
+            r = subtract(n1, n2); 
             break;
         case 'divide':
-            result = divide(nbr1, nbr2); 
+            r = divide(n1, n2); 
             break;
-    } 
+    }
+    clear();
+    result = r;
+    nbr1 = r;
 }
 
 function inputNumber(number) {
@@ -91,10 +103,7 @@ function commandParser(token) {
         inputNumber(token);
     }
     else if(token === 'clear') {
-        nbr1 = undefined;
-        nbr2 = undefined;
-        operator = undefined;
-        result = undefined;
+        clear();
     }
     else if (token === 'backspace') {
         backspace();
